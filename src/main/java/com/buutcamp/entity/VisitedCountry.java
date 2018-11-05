@@ -16,6 +16,8 @@ public class VisitedCountry {
     private String name;
     @Column(name = "year")
     private int year;
+    @Column(name = "continent")
+    private String continent;
 
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
@@ -69,5 +71,13 @@ public class VisitedCountry {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getContinent() {
+        return continent;
+    }
+
+    public void setContinent(String continent) {
+        this.continent = continent;
     }
 }
