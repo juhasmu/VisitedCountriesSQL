@@ -92,22 +92,22 @@ public class CountryDAO {
     public void saveCountry(VisitedCountry visitedCountry) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.save(visitedCountry);
+        session.saveOrUpdate(visitedCountry);
 
     }
     @Transactional
     public void saveYear(Year vuosi) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.save(vuosi);
+        session.saveOrUpdate(vuosi);
 
     }
     @Transactional
     public void saveAll(VisitedCountry visitedCountry,Year vuosi) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.save(vuosi);
-        session.save(visitedCountry);
+        session.saveOrUpdate(vuosi);
+        session.saveOrUpdate(visitedCountry);
 
     }
 }

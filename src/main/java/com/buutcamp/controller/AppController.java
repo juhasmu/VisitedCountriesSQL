@@ -38,6 +38,7 @@ public class AppController {
         List<VisitedCountry> countries = countryDAO.getCountries();
         //List<String> simpleList = new ArrayList<String>();
         sortCountries.sortList(countries);
+        //System.out.println(countries);
         model.addAttribute("countries", countries);
 
         model.addAttribute("visitedCountry",new VisitedCountry());
@@ -51,10 +52,11 @@ public class AppController {
         //CountryDAO countryDAO = appCtx.getBean("countryDAO",CountryDAO.class);
         testCountry.setContinent(visitedCountry);
         if(visitedCountry.getContinent()!=null) {
-            Year vuosi = new Year(visitedCountry.getYear());
-            visitedCountry.addVuosi(vuosi);
-            vuosi.addCountry(visitedCountry);
-            countryDAO.saveAll(visitedCountry, vuosi);
+            if (!testCountry.existsInSQL(visitedCountry)) {
+                int vuosi = visitedCountry.getYear();
+                visitedCountry.addVuosi(vuosi);
+                countryDAO.saveCountry(visitedCountry);
+            }
         }
 
         return "redirect:/";

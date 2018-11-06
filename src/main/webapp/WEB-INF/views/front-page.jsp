@@ -5,6 +5,7 @@
 <head>
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/second-page">Database</a>
 <form:form method="POST" action="saveCountry" modelAttribute="visitedCountry">
     Country: <form:input path="name"/><br/>
     Year visited: <form:input path="year"/><br/>

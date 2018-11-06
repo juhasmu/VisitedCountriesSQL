@@ -18,27 +18,27 @@ public class VisitedCountry {
     private int year;
     @Column(name = "continent")
     private String continent;
+    @ElementCollection
+    @CollectionTable(name="Years", joinColumns=@JoinColumn(name="visitedcountry_id"))
+    @Column(name = "years")
+    private List<Integer> years;
 
+    public void addVuosi(int vuosi){
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
-    @JoinTable(name = "visitedcountry_year",joinColumns = @JoinColumn(name = "visitedcountry_id"),inverseJoinColumns = @JoinColumn(name = "year_id"))
-    private List<Year> years;
-
-    public void addVuosi(Year vuosi){
-
-        if(this.years == null) {
-            this.years = new ArrayList<Year>();
+        if (years==null){
+            years=new ArrayList<Integer>();
         }
+
 
         this.years.add(vuosi);
 
     }
 
-    public List<Year> getYears() {
+    public List<Integer> getYears() {
         return years;
     }
 
-    public void setYears(List<Year> years) {
+    public void setYears(List<Integer> years) {
         this.years = years;
     }
 
@@ -53,6 +53,7 @@ public class VisitedCountry {
     public VisitedCountry(String name, int year) {
         this.name = name;
         this.year = year;
+        this.addVuosi(year);
     }
     public VisitedCountry() {
     }
@@ -79,5 +80,16 @@ public class VisitedCountry {
 
     public void setContinent(String continent) {
         this.continent = continent;
+    }
+
+    @Override
+    public String toString() {
+        return "VisitedCountry{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", year=" + year +
+                ", continent='" + continent + '\'' +
+                ", years=" + years +
+                '}';
     }
 }

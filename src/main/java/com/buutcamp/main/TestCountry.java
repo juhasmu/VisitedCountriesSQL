@@ -69,4 +69,39 @@ public class TestCountry {
             }
         }
     }
+    public boolean existsInSQL(VisitedCountry visitedCountry){
+        int i,j;
+        List<VisitedCountry> countries = countryDAO.getCountries();
+        for (VisitedCountry country: countries) {
+            if (country.getName().equals(visitedCountry.getName())){
+                if (country.getYear() == visitedCountry.getYear()) {
+                    return true;
+                } else {
+                    //country.addVuosi(visitedCountry.getYear());
+                    country.setYear(visitedCountry.getYear());
+                    countryDAO.saveCountry(country);
+                    return true;
+                }
+            }
+        }
+        return false;
+        /*
+        for(i=0;i<countries.size();i++){
+            if (countries.get(i).getName().equals(visitedCountry)){
+                List<Year> years = countries.get(i).getYears();
+                for (j=0;j<years.size();i++){
+                    if(visitedCountry.getYear()==years.get(j).getYear()){
+                        return true;
+                    }
+                }
+                Year vuosi = new Year(visitedCountry.getYear());
+                countries.get(i).addVuosi(vuosi);
+                vuosi.addCountry(countries.get(i));
+                System.out.println("MyCountry: "+countries.get(i).getName()+" "+vuosi.getYear());
+                countryDAO.saveAll(countries.get(i),vuosi);
+                return true;
+            }
+        }
+        return false;*/
+    }
 }

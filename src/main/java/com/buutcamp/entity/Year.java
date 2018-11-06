@@ -15,9 +15,8 @@ public class Year {
 
     @Column(name = "year")
     private int year;
-
-    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
-    @JoinTable(name = "visitedcountry_year",joinColumns = @JoinColumn(name = "year_id"),inverseJoinColumns = @JoinColumn(name = "visitedcountry_id"))
+    @Column(name = "countries")
+    @ElementCollection
     private List<VisitedCountry> countries;
 
     public Year() {
