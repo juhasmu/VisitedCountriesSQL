@@ -27,7 +27,7 @@ public class TestCountry {
         asianCountries=countryDAO.getAsianCountries();
         if (asianCountries != null) {
             for (i = 0; i < asianCountries.size(); i++) {
-                if (asianCountries.get(i).getName().equals(visitedCountry.getName())) {
+                if (asianCountries.get(i).getName().toLowerCase().equals(visitedCountry.getName().toLowerCase())) {
                     visitedCountry.setContinent("asia");
                     return;
                 }
@@ -35,35 +35,35 @@ public class TestCountry {
         }
         africanCountries=countryDAO.getAfricanCountries();
         for (i=0;i<africanCountries.size();i++){
-            if (africanCountries.get(i).getName().equals(visitedCountry.getName())){
+            if (africanCountries.get(i).getName().toLowerCase().equals(visitedCountry.getName().toLowerCase())){
                 visitedCountry.setContinent("africa");
                 return;
             }
         }
         europanCountries=countryDAO.getEuropanCountries();
         for (i=0;i<europanCountries.size();i++){
-            if (europanCountries.get(i).getName().equals(visitedCountry.getName())){
+            if (europanCountries.get(i).getName().toLowerCase().equals(visitedCountry.getName().toLowerCase())){
                 visitedCountry.setContinent("europa");
                 return;
             }
         }
         oceanianCountries=countryDAO.getOceanianCountries();
         for (i=0;i<oceanianCountries.size();i++){
-            if (oceanianCountries.get(i).getName().equals(visitedCountry.getName())){
+            if (oceanianCountries.get(i).getName().toLowerCase().equals(visitedCountry.getName().toLowerCase())){
                 visitedCountry.setContinent("oceania");
                 return;
             }
         }
         northAmericanCountries=countryDAO.getNorthAmericanCountries();
         for (i=0;i<northAmericanCountries.size();i++){
-            if (northAmericanCountries.get(i).getName().equals(visitedCountry.getName())){
+            if (northAmericanCountries.get(i).getName().toLowerCase().equals(visitedCountry.getName().toLowerCase())){
                 visitedCountry.setContinent("north_america");
                 return;
             }
         }
         southAmericanCountries=countryDAO.getSouthAmericanCountries();
         for (i=0;i<southAmericanCountries.size();i++){
-            if (southAmericanCountries.get(i).getName().equals(visitedCountry.getName())){
+            if (southAmericanCountries.get(i).getName().toLowerCase().equals(visitedCountry.getName().toLowerCase())){
                 visitedCountry.setContinent("south_america");
                 return;
             }
@@ -73,7 +73,7 @@ public class TestCountry {
         int i,j;
         List<VisitedCountry> countries = countryDAO.getCountries();
         for (VisitedCountry country: countries) {
-            if (country.getName().equals(visitedCountry.getName())){
+            if (country.getName().toLowerCase().equals(visitedCountry.getName().toLowerCase())){
                 if (country.getYear() == visitedCountry.getYear()) {
                     return true;
                 } else {

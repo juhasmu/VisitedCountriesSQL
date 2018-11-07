@@ -56,9 +56,11 @@ public class AppController {
                 int vuosi = visitedCountry.getYear();
                 visitedCountry.addVuosi(vuosi);
                 countryDAO.saveCountry(visitedCountry);
+                return "redirect:/";
             }
+            return "redirect:/";
         }
 
-        return "redirect:/";
+        return "redirect:/second-page";
     }
 }
