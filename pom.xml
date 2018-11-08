@@ -7,6 +7,7 @@
     <groupId>com.buutcamp</groupId>
     <artifactId>VisitedCountriesSQL</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
     <build>
         <plugins>
             <plugin>
@@ -19,6 +20,11 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+    </properties>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
