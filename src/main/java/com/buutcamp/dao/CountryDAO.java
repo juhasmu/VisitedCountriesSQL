@@ -28,6 +28,22 @@ public class CountryDAO {
         return list;
     }
     @Transactional
+    public void deleteCountry(int id) {
+
+        Session session = sessionFactory.getCurrentSession();
+        VisitedCountry vc = session.get(VisitedCountry.class,id);
+        session.delete(vc);
+
+        //Query query = session.createQuery("delete from Year where id=:countryId");
+        //Query query = session.createQuery("delete from VisitedCountry where id=:countryId");
+
+        //query.setParameter("countryId", id);
+        //query2.setParameter("countryId", id);
+
+        //query.executeUpdate();
+        //query2.executeUpdate();
+    }
+    @Transactional
     public List<AsianCountry> getAsianCountries(){
         Session session = sessionFactory.getCurrentSession();
         //session.beginTransaction();

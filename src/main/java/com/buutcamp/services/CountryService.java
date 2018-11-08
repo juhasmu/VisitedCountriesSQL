@@ -22,6 +22,10 @@ public class CountryService {
     @Autowired
     private SortCountries sortCountries;
 
+    public void deleteCountry(int id) {
+        countryDAO.deleteCountry(id);
+    }
+
     public List<VisitedCountry> getCountries() {
         return countryDAO.getCountries();
     }

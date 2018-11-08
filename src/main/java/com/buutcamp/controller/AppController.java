@@ -56,4 +56,11 @@ public class AppController {
 
         return "redirect:/second-page";
     }
+
+    @GetMapping("/deleteCountry")
+    public String deleteStudent(@RequestParam("countryId") int id) {
+
+        countryService.deleteCountry(id);
+        return "redirect:/";
+    }
 }

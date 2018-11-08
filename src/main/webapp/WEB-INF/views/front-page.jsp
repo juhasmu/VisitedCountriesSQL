@@ -26,12 +26,16 @@
         <c:set var = "count_asia" value = "${0}"/>
         <c:forEach items = "${countries}" var = "listElement">
             <c:if test = "${listElement.continent.equals('asia')}">
+                <c:url var="deleteLink" value="deleteCountry">
+                        <c:param name="countryId" value="${listElement.id}" />
+                    </c:url>
                 <c:set var = "count_asia" value = "${count_asia+1}"/>
                 <tr><td>
                 <c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
                 <c:out value = "${listElement.name}"/>
                 </td>
                 <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+                <td><a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this country?'))) return false">Delete</a></td>
                 </tr><c:if test = "${listElement.id==newist}"></p></c:if>
             </c:if>
         </c:forEach>
@@ -47,12 +51,16 @@
             <c:set var = "count_africa" value = "${0}"/>
             <c:forEach items = "${countries}" var = "listElement">
                 <c:if test = "${listElement.continent.equals('africa')}">
+                    <c:url var="deleteLink" value="deleteCountry">
+                                        <c:param name="countryId" value="${listElement.id}" />
+                                    </c:url>
                     <c:set var = "count_africa" value = "${count_africa+1}"/>
                     <c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
                     <tr><td>
                     <c:out value = "${listElement.name}"/>
                     </td>
                     <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+                    <td><a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this country?'))) return false">Delete</a></td>
                     </tr><c:if test = "${listElement.id==newist}"></p></c:if>
                 </c:if>
             </c:forEach>
@@ -68,11 +76,15 @@
             <c:set var = "count_europa" value = "${0}"/>
             <c:forEach items = "${countries}" var = "listElement">
                 <c:if test = "${listElement.continent.equals('europa')}">
+                    <c:url var="deleteLink" value="deleteCountry">
+                                                        <c:param name="countryId" value="${listElement.id}" />
+                                                    </c:url>
                     <c:set var = "count_europa" value = "${count_europa+1}"/>
                     <tr><td><c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
                     <c:out value = "${listElement.name}"/>
                     </td>
                     <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+                    <td><a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this country?'))) return false">Delete</a></td>
                     </tr><c:if test = "${listElement.id==newist}"></p></c:if>
                 </c:if>
             </c:forEach>
@@ -88,13 +100,17 @@
             <c:set var = "count_na" value = "${0}"/>
             <c:forEach items = "${countries}" var = "listElement">
                 <c:if test = "${listElement.continent.equals('north_america')}">
+                    <c:url var="deleteLink" value="deleteCountry">
+                                                                        <c:param name="countryId" value="${listElement.id}" />
+                                                                    </c:url>
                     <c:set var = "count_na" value = "${count_na+1}"/>
                     <tr><td><c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
                     <c:out value = "${listElement.name}"/>
                     </td>
                     <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+                     <td><a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this country?'))) return false">Delete</a></td>
                     </tr><c:if test = "${listElement.id==newist}"></p></c:if>
-                </c:if>
+                                       </c:if>
             </c:forEach>
             <c:out value="${count_na}"/> Countries visited in North America
         </table>
@@ -108,11 +124,15 @@
             <c:set var = "count_sa" value = "${0}"/>
             <c:forEach items = "${countries}" var = "listElement">
                 <c:if test = "${listElement.continent.equals('south_america')}">
+                    <c:url var="deleteLink" value="deleteCountry">
+                                                                                            <c:param name="countryId" value="${listElement.id}" />
+                                                                                        </c:url>
                     <c:set var = "count_sa" value = "${count_sa+1}"/>
                     <tr><td><c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
                     <c:out value = "${listElement.name}"/>
                     </td>
                     <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+                    <td><a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this country?'))) return false">Delete</a></td>
                     </tr><c:if test = "${listElement.id==newist}"></p></c:if>
                 </c:if>
             </c:forEach>
@@ -128,11 +148,15 @@
             <c:set var = "count_oceania" value = "${0}"/>
             <c:forEach items = "${countries}" var = "listElement">
                 <c:if test = "${listElement.continent.equals('oceania')}">
+                    <c:url var="deleteLink" value="deleteCountry">
+                                                                                                                <c:param name="countryId" value="${listElement.id}" />
+                                                                                                            </c:url>
                     <c:set var = "count_oceania" value = "${count_oceania+1}"/>
                     <tr><td><c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
                     <c:out value = "${listElement.name}"/>
                     </td><c:if test = "${listElement.id==newist}"></p></c:if>
                     <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+                    <td><a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this country?'))) return false">Delete</a></td>
                     </tr>
                 </c:if>
             </c:forEach>
