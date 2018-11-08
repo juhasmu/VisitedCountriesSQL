@@ -18,15 +18,17 @@ public class VisitedCountry {
     private int year;
     @Column(name = "continent")
     private String continent;
-    @ElementCollection
-    @CollectionTable(name="Years", joinColumns=@JoinColumn(name="visitedcountry_id"))
-    @Column(name = "years")
-    private List<Integer> years;
 
-    public void addVuosi(int vuosi){
+    //@ElementCollection
+    //@CollectionTable(name="Years", joinColumns=@JoinColumn(name="visitedcountry_id"))
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "years")
+    private List<Year> years;
+
+    public void addVuosi(Year vuosi){
 
         if (years==null){
-            years=new ArrayList<Integer>();
+            years=new ArrayList<>();
         }
 
 
@@ -34,11 +36,11 @@ public class VisitedCountry {
 
     }
 
-    public List<Integer> getYears() {
+    public List<Year> getYears() {
         return years;
     }
 
-    public void setYears(List<Integer> years) {
+    public void setYears(List<Year> years) {
         this.years = years;
     }
 
@@ -50,9 +52,8 @@ public class VisitedCountry {
         this.id = id;
     }
 
-    public VisitedCountry(String name, int year) {
+    public VisitedCountry(String name, Year year) {
         this.name = name;
-        this.year = year;
         this.addVuosi(year);
     }
     public VisitedCountry() {

@@ -21,10 +21,11 @@
     <c:if test = "${listElement.continent.equals('asia')}">
         <c:set var = "count_asia" value = "${count_asia+1}"/>
         <tr><td>
+        <c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
         <c:out value = "${listElement.name}"/>
         </td>
-        <td><c:out value = "${listElement.year}"/></td>
-        </tr>
+        <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+        </tr><c:if test = "${listElement.id==newist}"></p></c:if>
     </c:if>
 </c:forEach>
 <c:out value="${count_asia}"/> Countries visited in Asia
@@ -38,11 +39,12 @@
 <c:forEach items = "${countries}" var = "listElement">
      <c:if test = "${listElement.continent.equals('africa')}">
         <c:set var = "count_africa" value = "${count_africa+1}"/>
+        <c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
         <tr><td>
         <c:out value = "${listElement.name}"/>
         </td>
-        <td><c:out value = "${listElement.year}"/></td>
-        </tr>
+        <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+        </tr><c:if test = "${listElement.id==newist}"></p></c:if>
     </c:if>
 </c:forEach>
 <c:out value="${count_africa}"/> Countries visited in Africa
@@ -56,11 +58,11 @@
 <c:forEach items = "${countries}" var = "listElement">
     <c:if test = "${listElement.continent.equals('europa')}">
         <c:set var = "count_europa" value = "${count_europa+1}"/>
-        <tr><td>
+        <tr><td><c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
         <c:out value = "${listElement.name}"/>
         </td>
-        <td><c:out value = "${listElement.year}"/></td>
-    </tr>
+        <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+    </tr><c:if test = "${listElement.id==newist}"></p></c:if>
     </c:if>
 
 </c:forEach>
@@ -75,11 +77,11 @@
 <c:forEach items = "${countries}" var = "listElement">
     <c:if test = "${listElement.continent.equals('north_america')}">
         <c:set var = "count_na" value = "${count_na+1}"/>
-        <tr><td>
+        <tr><td><c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
         <c:out value = "${listElement.name}"/>
         </td>
-        <td><c:out value = "${listElement.year}"/></td>
-    </tr>
+        <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+    </tr><c:if test = "${listElement.id==newist}"></p></c:if>
     </c:if>
 
 </c:forEach>
@@ -94,11 +96,11 @@
 <c:forEach items = "${countries}" var = "listElement">
     <c:if test = "${listElement.continent.equals('south_america')}">
         <c:set var = "count_sa" value = "${count_sa+1}"/>
-        <tr><td>
+        <tr><td><c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
         <c:out value = "${listElement.name}"/>
         </td>
-        <td><c:out value = "${listElement.year}"/></td>
-    </tr>
+        <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
+    </tr><c:if test = "${listElement.id==newist}"></p></c:if>
     </c:if>
 
 </c:forEach>
@@ -113,10 +115,10 @@
 <c:forEach items = "${countries}" var = "listElement">
     <c:if test = "${listElement.continent.equals('oceania')}">
         <c:set var = "count_oceania" value = "${count_oceania+1}"/>
-        <tr><td>
+        <tr><td><c:if test = "${listElement.id==newist}"><p style="color:Tomato;"></c:if>
         <c:out value = "${listElement.name}"/>
-        </td>
-        <td><c:out value = "${listElement.year}"/></td>
+        </td><c:if test = "${listElement.id==newist}"></p></c:if>
+        <td>|<c:forEach items = "${listElement.years}" var = "year"><c:out value = "${year.year}"/>|</c:forEach></td>
     </tr>
     </c:if>
 

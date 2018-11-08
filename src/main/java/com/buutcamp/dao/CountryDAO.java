@@ -21,7 +21,7 @@ public class CountryDAO {
     public List<VisitedCountry> getCountries() {
         Session session = sessionFactory.getCurrentSession();
         //session.beginTransaction();
-        Query<VisitedCountry> query = session.createQuery("from VisitedCountry", VisitedCountry.class);
+        Query<VisitedCountry> query = session.createQuery("from VisitedCountry order by name", VisitedCountry.class);
         //session.getTransaction().commit();
         List<VisitedCountry> list = query.getResultList();
         //session.close();

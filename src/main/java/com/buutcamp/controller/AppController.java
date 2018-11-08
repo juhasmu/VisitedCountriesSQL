@@ -6,6 +6,7 @@ import com.buutcamp.entity.VisitedCountry;
 import com.buutcamp.entity.Year;
 import com.buutcamp.main.SortCountries;
 import com.buutcamp.main.TestCountry;
+import com.buutcamp.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -23,11 +24,7 @@ public class AppController {
 
     //DAO reference
     @Autowired
-    private CountryDAO countryDAO;
-    @Autowired
-    private TestCountry testCountry;
-    @Autowired
-    private SortCountries sortCountries;
+    private CountryService countryService;
 
 
     @GetMapping("/")
@@ -35,11 +32,12 @@ public class AppController {
 
         //AnnotationConfigApplicationContext appCtx = new AnnotationConfigApplicationContext(AppConfig.class);
         //CountryDAO countryDAO = appCtx.getBean("countryDAO",CountryDAO.class);
-        List<VisitedCountry> countries = countryDAO.getCountries();
+        List<VisitedCountry> countries = countryService.getCountries();
+        int newist =countryService.getLast(countries);
         //List<String> simpleList = new ArrayList<String>();
-        sortCountries.sortList(countries);
         //System.out.println(countries);
         model.addAttribute("countries", countries);
+        model.addAttribute("newist",newist);
 
         model.addAttribute("visitedCountry",new VisitedCountry());
 
@@ -50,14 +48,9 @@ public class AppController {
     public String saveCountry(@ModelAttribute("visitedCountry") VisitedCountry visitedCountry, Model model){
         //AnnotationConfigApplicationContext appCtx = new AnnotationConfigApplicationContext(AppConfig.class);
         //CountryDAO countryDAO = appCtx.getBean("countryDAO",CountryDAO.class);
-        testCountry.setContinent(visitedCountry);
+        countryService.setContinent(visitedCountry);
         if(visitedCountry.getContinent()!=null) {
-            if (!testCountry.existsInSQL(visitedCountry)) {
-                int vuosi = visitedCountry.getYear();
-                visitedCountry.addVuosi(vuosi);
-                countryDAO.saveCountry(visitedCountry);
-                return "redirect:/";
-            }
+            countryService.saveHandler(visitedCountry);
             return "redirect:/";
         }
 

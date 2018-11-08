@@ -15,22 +15,14 @@ public class Year {
 
     @Column(name = "year")
     private int year;
-    @Column(name = "countries")
-    @ElementCollection
-    private List<VisitedCountry> countries;
+    @Column(name ="country")
+    private String country;
 
     public Year() {
     }
 
     public Year(int year) {
         this.year = year;
-    }
-
-    public void addCountry(VisitedCountry country){
-        if(this.countries == null) {
-            this.countries = new ArrayList<VisitedCountry>();
-        }
-        this.countries.add(country);
     }
 
     public int getId() {
@@ -49,11 +41,11 @@ public class Year {
         this.year = year;
     }
 
-    public List<VisitedCountry> getCountries() {
-        return countries;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountries(List<VisitedCountry> countries) {
-        this.countries = countries;
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

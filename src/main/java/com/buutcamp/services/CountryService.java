@@ -1,19 +1,39 @@
-package com.buutcamp.main;
+package com.buutcamp.services;
 
 import com.buutcamp.dao.CountryDAO;
 import com.buutcamp.entity.*;
+import com.buutcamp.main.SortCountries;
+import com.buutcamp.main.TestCountry;
+import org.hibernate.resource.beans.container.internal.JpaCompliantLifecycleStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class TestCountry {
+@Service
+public class CountryService {
 
     @Autowired
     private CountryDAO countryDAO;
 
+    @Autowired
+    private TestCountry testCountry;
+    @Autowired
+    private SortCountries sortCountries;
+
+    public List<VisitedCountry> getCountries() {
+        return countryDAO.getCountries();
+    }
+    public int getLast(List<VisitedCountry> list){
+        int newist=0;
+        for(VisitedCountry country:list){
+            if (country.getId()>newist){
+                newist = country.getId();
+            }
+        }
+        return newist;
+    }
     public void setContinent(VisitedCountry visitedCountry){
 
         int i;
@@ -69,36 +89,34 @@ public class TestCountry {
             }
         }
     }
-    public int existsInSQL(VisitedCountry visitedCountry,List<VisitedCountry> countries){
-        int i,j;
-        for (VisitedCountry country: countries) {
-            if (country.getName().toLowerCase().equals(visitedCountry.getName().toLowerCase())){
-                for (Year year:country.getYears()){
-                    if (year.getYear() == visitedCountry.getYear()) {
-                        return -2;
+    public void saveNewCountry(VisitedCountry visitedCountry){
+        Year vuosi = new Year(visitedCountry.getYear());
+        vuosi.setCountry(visitedCountry.getName());
+        visitedCountry.addVuosi(vuosi);
+        countryDAO.saveAll(visitedCountry,vuosi);
+    }
+
+    public void saveHandler(VisitedCountry visitedCountry) {
+        List<VisitedCountry> countries = countryDAO.getCountries();
+        int id =testCountry.existsInSQL(visitedCountry,countries);
+        System.out.println(id);
+        if (id==-1) {
+            saveNewCountry(visitedCountry);
+        } else {
+            if (id>-1) {
+                for (VisitedCountry country:countries) {
+                    if (country.getId()==id){
+                        Year vuosi = new Year(visitedCountry.getYear());
+                        vuosi.setCountry(country.getName());
+                        country.addVuosi(vuosi);
+                        countryDAO.saveAll(country,vuosi);
+                        //country.setYear(visitedCountry.getYear());
+                        //countryDAO.saveCountry(country);
                     }
+
                 }
-                return country.getId();
+
             }
         }
-        return -1;
-        /*
-        for(i=0;i<countries.size();i++){
-            if (countries.get(i).getName().equals(visitedCountry)){
-                List<Year> years = countries.get(i).getYears();
-                for (j=0;j<years.size();i++){
-                    if(visitedCountry.getYear()==years.get(j).getYear()){
-                        return true;
-                    }
-                }
-                Year vuosi = new Year(visitedCountry.getYear());
-                countries.get(i).addVuosi(vuosi);
-                vuosi.addCountry(countries.get(i));
-                System.out.println("MyCountry: "+countries.get(i).getName()+" "+vuosi.getYear());
-                countryDAO.saveAll(countries.get(i),vuosi);
-                return true;
-            }
-        }
-        return false;*/
     }
 }
